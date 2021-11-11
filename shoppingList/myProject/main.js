@@ -30,6 +30,7 @@ window.onload = function () {
         </button>
     </div>
     <div class="item__divider"></div>`;
+
     id++;
     return itemRow;
   }
@@ -45,16 +46,25 @@ window.onload = function () {
       const toBeDeleted = document.querySelector(`.item__row[data-id="${id}"]`);
       toBeDeleted.remove();
     }
+    if (event.target.className === "items") {
+      return;
+    }
+    if (event.target.className === "item__checkbox") {
+      const checkId = event.target.id;
+      const toBeLined = document.querySelector(
+        `.item__checkbox[id="${checkId}"]`
+      );
 
-    const cbox = document.querySelector(".item__checkbox");
-    if (cbox) {
-      const t = document.querySelector("label");
-      if (!cbox.checked) {
-        cbox.checked = true;
-        t.setAttribute("class", "item__name");
+      if (toBeLined.checked) {
+        document
+          .querySelector(`label[for="${checkId}"]`)
+          .setAttribute("class", "item__name");
+        console.log(document.querySelector(`label[for="${checkId}"]`));
       } else {
-        cbox.checked = false;
-        t.setAttribute("class", "");
+        document
+          .querySelector(`label[for="${checkId}"]`)
+          .setAttribute("class", "");
+        console.log(document.querySelector(`label[for="${checkId}"]`));
       }
     }
   });
